@@ -9,6 +9,11 @@ Scripts related to the following paper:
 -------------------------
 Essentially all scripts here use AFNI; one also uses FreeSurfer.
 
+This README describes the contents of the `scripts_biowulf` directory, which contains the main processing scripts.
+
+Other scripts directories contain supplementary scripts after processing was complete, mainly for image generation.
+
+-------------------------
 These scripts were run on the NIH's Biowulf computing cluster, hence there are considerations for batch processing with the slurm system.  Each processing step is divided into a pair of associated scripts:
 + **do_SOMETHING.tcsh**: a script that mostly contains the processing options and commands for a single subject, with subject ID and any other relevant information passed in as a command line argument when using it.  Most of the lines at the top of the file set up the processing, directory structure (most every step generates a new filetree called `data_SOMETHING/`), and usage of a scratch disk for intermediate outputs.  At some point, actual processing commands are run, and then there is a bit of checking, copying from the scratch disk and verifying permissions, and then exiting.
 + **run_SOMETHING.tcsh**: mostly manage the group-level aspects of things, to set up processing over all subjects of interest and start a swarm job running on the cluster.
