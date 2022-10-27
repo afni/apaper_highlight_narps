@@ -1,12 +1,21 @@
 # apaper_highlight_narps
-Scripts related to the paper
+Scripts related to the following paper:
 
+  **Highlight Results, Don't Hide Them: Enhance interpretation, reduce biases and improve reproducibility** \
+  by Paul A Taylor, Richard C Reynolds, Vince Calhoun, Javier Gonzalez-Castillo, 
+  Daniel A Handwerker, Peter A Bandettini, Amanda F Mejia, Gang Chen \
+  https://www.biorxiv.org/content/10.1101/2022.10.26.513929v1
+  
 -------------------------
 Essentially all scripts here use AFNI; one also uses FreeSurfer.
 
 These scripts were run on the NIH's Biowulf computing cluster, hence there are considerations for batch processing with the slurm system.  Each processing step is divided into a pair of associated scripts:
 + **do_SOMETHING.tcsh**: a script that mostly contains the processing options and commands for a single subject, with subject ID and any other relevant information passed in as a command line argument when using it.  Most of the lines at the top of the file set up the processing, directory structure (most every step generates a new filetree called `data_SOMETHING/`), and usage of a scratch disk for intermediate outputs.  At some point, actual processing commands are run, and then there is a bit of checking, copying from the scratch disk and verifying permissions, and then exiting.
 + **run_SOMETHING.tcsh**: mostly manage the group-level aspects of things, to set up processing over all subjects of interest and start a swarm job running on the cluster.
+
+The input data comes from the NARPS project (Botvinik-Nezer et al., 2020): \
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7771346/ \
+This paper uses both the raw, unprocessed data as well as the participating teams' results, which were uploaded to NeuroVault (see the same paper for those details).
 
 -------------------------
 The enumeration in script names is to help to organize the order of processing (kind of a Dewey Decimal-esque system).  Gaps between numbers are fine---they just leave space for other processing steps to have been inserted, as might be necessary.  Loosely, each "decade" of enumeration corresponds to a different stage of processing:
