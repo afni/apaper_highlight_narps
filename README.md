@@ -9,8 +9,8 @@ Scripts related to the following paper:
   https://www.biorxiv.org/content/10.1101/2022.10.26.513929v1
 
 ---------------------------------------------------------------------------
-The input data comes from the NARPS project (Botvinik-Nezer et al., 2020):
-  https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7771346/
+The input data comes from the NARPS project (Botvinik-Nezer et al., 2020): \
+  https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7771346/ \
 This paper uses both the raw, unprocessed data as well as the
 participating teams' results, which were uploaded to NeuroVault (see
 the same paper for those details).
@@ -23,10 +23,12 @@ including:
 + Checking the data
 + Estimating nonlinear alignment to template space and skullstripping
   with `@SSwarper`
-+ Full FMRI time series processing through regression modeling with
-  `afni_proc.py`
++ Full FMRI time series processing through regression modeling and QC
+  generation with `afni_proc.py`
 + Group level modeling: both voxelwise (with cluster calcs) and
-  ROI-based (using `RBA`, in particular)
+  ROI-based (using `RBA`, in particular) 
+
+... and more.
 
 The `scripts_suppl_proc_vox` directory contains supplementary scripts
 for making images of the above-processed data, mainly for figure
