@@ -128,6 +128,64 @@ set ap_cmd = ${sdir_ap}/ap.cmd.${subj}
 # write AP command to file
 cat <<EOF >! ${ap_cmd}
 
+# Some notes on afni_proc.py (AP) option choices:
+#
+# **No** blur block is used here, because this is processing for ROI-based
+# analysis (and could be used for ETAC, too, say).  Blurring should not
+# be used for ROI-based analysis.  See the 'do_23*.tcsh' script for the 
+# related processing that does include blurring (for standard voxelwise
+# analysis).
+#
+# This adds useful APQC HTML items, radial correlation images of initial
+# and volume-registered data (might see artifacts):
+#   -radial_correlate_blocks  tcat volreg
+# 
+# Even though we load the skullstripped anatomical (proc'ed by @SSwarper), 
+# having the original, skull-on dataset brought along as a follower dset
+# can be useful for verifying EPI-anatomical alignment if the CSF is bright:
+#   -anat_follower            anat_w_skull anat \${anat_skull}
+#
+# Generally recommended to run @SSwarper prior to afni_proc.py for 
+# skullstripping (SS) the anatomical and estimating nonlinear warp to
+# template;  then provide those results in options here:
+#   -copy_anat                \${anat_cp}
+#   ...
+#   -tlrc_base                \${template}
+#   -tlrc_NL_warp                               
+#   -tlrc_NL_warped_dsets     \${dsets_NL_warp} 
+#
+# This option can help improve EPI-anatomical alignment, esp. if the EPI
+# has brightness inhomogeneity (and it doesn't seem to hurt alignment even
+# if that is not the case); generally recommended with human FMRI 
+# data processing nowadays:
+#   -align_unifize_epi        local 
+#
+# Generally recommended starting point for EPI-anatomical alignment in human
+# FMRI proc (left-right flipping can still occur...):
+#   -align_opts_aea           -cost lpc+ZZ -giant_move -check_flip 
+#
+# Which EPI should be a consistently good choice to serve as a
+# reference for both motion correction and EPI-anatomical alignment?  
+# The one with the fewest outliers sounds good:
+#   -volreg_align_to          MIN_OUTLIER
+#
+# Add a post-volreg TSNR plot to the APQC HTML:
+#   -volreg_compute_tsnr      yes
+#
+# Create useful mask from EPI-anatomical mask intersection (not applied
+# to the EPI data here, but used to identify brain region):
+#   -mask_epi_anat            yes
+#
+# Choose this shape and scaling for the regression basis; the '-1' in the
+# argument means that an event with 1 s duration is scaled to 1; the choice
+# of number is based on typical event duration:
+#   -regress_basis_multi      "dmUBLOCK(-1)" 
+#
+# Try to use Python's Matplotlib module when making the APQC HTML doc, for
+# prettier (and more informative) plots; this is actually the default now:
+#   -html_review_style        pythonic
+#
+
 
 afni_proc.py                                                                 \
     -subj_id                  ${subj}                                        \
