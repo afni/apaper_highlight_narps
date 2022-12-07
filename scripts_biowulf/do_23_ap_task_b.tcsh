@@ -141,7 +141,8 @@ cat <<EOF >! ${ap_cmd}
 # 
 # Even though we load the skullstripped anatomical (proc'ed by @SSwarper), 
 # having the original, skull-on dataset brought along as a follower dset
-# can be useful for verifying EPI-anatomical alignment if the CSF is bright:
+# can be useful for verifying EPI-anatomical alignment when the brigt CSF
+# extends outside the brain.
 #   -anat_follower            anat_w_skull anat \${anat_skull}
 #
 # Generally recommended to run @SSwarper prior to afni_proc.py for 
@@ -165,7 +166,7 @@ cat <<EOF >! ${ap_cmd}
 #
 # Which EPI should be a consistently good choice to serve as a
 # reference for both motion correction and EPI-anatomical alignment?  
-# The one with the fewest outliers sounds good:
+# The one with the fewest outliers (and so low motion) sounds good:
 #   -volreg_align_to          MIN_OUTLIER
 #
 # Add a post-volreg TSNR plot to the APQC HTML:
@@ -175,9 +176,13 @@ cat <<EOF >! ${ap_cmd}
 # to the EPI data here, but used to identify brain region):
 #   -mask_epi_anat            yes
 #
+# Compute a time series that is the sum of all non-baseline regressors,
+# for QC visualization:
+#   -regress_make_ideal_sum   sum_ideal.1D
+#
 # Choose this shape and scaling for the regression basis; the '-1' in the
 # argument means that an event with 1 s duration is scaled to 1; the choice
-# of number is based on typical event duration:
+# of number is based on typical or average event duration:
 #   -regress_basis_multi      "dmUBLOCK(-1)" 
 #
 # Try to use Python's Matplotlib module when making the APQC HTML doc, for
