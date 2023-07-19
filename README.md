@@ -6,7 +6,7 @@ Scripts related to the following paper:
   by Paul A Taylor, Richard C Reynolds, Vince Calhoun, Javier
   Gonzalez-Castillo, Daniel A Handwerker, Peter A Bandettini, Amanda F
   Mejia, Gang Chen \
-  https://www.biorxiv.org/content/10.1101/2022.10.26.513929v1
+  https://pubmed.ncbi.nlm.nih.gov/37116766/
 
 ---------------------------------------------------------------------------
 The input data comes from the NARPS project (Botvinik-Nezer et al., 2020): \
