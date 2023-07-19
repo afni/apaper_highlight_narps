@@ -5,7 +5,8 @@ Scripts related to the following paper:
   biases and improve reproducibility** \
   by Paul A Taylor, Richard C Reynolds, Vince Calhoun, Javier
   Gonzalez-Castillo, Daniel A Handwerker, Peter A Bandettini, Amanda F
-  Mejia, Gang Chen \
+  Mejia, Gang Chen (2023) \
+  Neuroimage 274:120138. doi: 10.1016/j.neuroimage.2023.120138 \
   https://pubmed.ncbi.nlm.nih.gov/37116766/
 
 ---------------------------------------------------------------------------
